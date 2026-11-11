@@ -1,3 +1,6 @@
+import TiltCard from "./TiltCard";
+import { ageLabel, formatDate, isAgeing } from "../utils";
+
 function badgeClass(status) {
   if (status === "Open") return "badge open";
   if (status === "In Progress") return "badge progress";
@@ -10,16 +13,20 @@ export default function ComplaintList({ complaints, onSelect }) {
   }
   return (
     <ul className="list">
-      {complaints.map((c) => (
-        <li key={c.id}>
+      {complaints.map((c, i) => (
+        <TiltCard as="li" key={c.id} className={isAgeing(c) ? "ageing" : ""} delay={Math.min(i, 8) * 45}>
           <h3>
             <button type="button" onClick={() => onSelect(c.id)}>{c.title}</button>
           </h3>
           <p className="meta">
-            {c.category} · {c.priority} priority · {c.location || "No location given"} · raised by {c.created_by_name}
+            {c.category} · {c.location || "No location given"} · raised by {c.created_by_name} · {formatDate(c.created_at)}
           </p>
-          <span className={badgeClass(c.status)}>{c.status}</span>
-        </li>
+          <div className="row-line">
+            <span className={badgeClass(c.status)}>{c.status}</span>
+            <span className={`priority-tag${c.priority === "High" ? " high" : ""}`}>{c.priority} priority</span>
+            <span className={`age${isAgeing(c) ? " ageing" : ""}${c.status === "Resolved" ? " resolved-age" : ""}`}>{ageLabel(c)}</span>
+          </div>
+        </TiltCard>
       ))}
     </ul>
   );

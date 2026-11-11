@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { api, setSession } from "../api";
+import TiltCard from "../components/TiltCard";
 
 export default function AuthPage({ onLogin }) {
   const [mode, setMode] = useState("login");
@@ -30,7 +31,7 @@ export default function AuthPage({ onLogin }) {
 
   return (
     <div className="container auth-box">
-      <div className="card">
+      <TiltCard as="div" className="card">
         <h1>Campus Maintenance Tracker</h1>
         <p className="hint">Raise a maintenance complaint, track its status, and see updates from the maintenance team.</p>
         {error && <div className="error">{error}</div>}
@@ -47,7 +48,7 @@ export default function AuthPage({ onLogin }) {
           </label>
           <label>
             <span>Password</span>
-            <input type="password" value={form.password} onChange={(e) => update("password", e.target.value)} required />
+            <input type="password" value={form.password} onChange={(e) => setForm((prev) => ({ ...prev, password: e.target.value }))} required />
           </label>
           {mode === "register" && (
             <label>
@@ -67,10 +68,11 @@ export default function AuthPage({ onLogin }) {
             <>Already have an account? <button className="secondary" type="button" onClick={() => setMode("login")}>Log in</button></>
           )}
         </p>
-        <p className="hint">
-          Demo accounts: admin@demo.local / Admin123 (admin) and student@demo.local / Student123 (student).
-        </p>
-      </div>
+        <div className="demo-box">
+          Demo accounts — admin: <code>admin@demo.local / Admin123</code><br />
+          Student: <code>student@demo.local / Student123</code>
+        </div>
+      </TiltCard>
     </div>
   );
 }

@@ -24,6 +24,16 @@ environment used for development, so the built-in SQLite module is used instead.
 - Status workflow: Open -> In Progress -> Resolved (admins only, forward only)
 - Comments and updates on each complaint
 - Dashboard with counts by status and category
+- Resolution clock: every complaint shows how many days it has been open,
+  open complaints older than 7 days are flagged, and the list can be sorted
+  by newest, oldest, highest priority, or longest open
+- Status pipeline strip (Open → In Progress → Resolved) with live counts —
+  select a stage to filter the list
+- Category breakdown chart built from the real stats, and CSV export of the
+  currently filtered list
+- Dark theme (charcoal with a single muted brass accent), CSS-only 3D tilt
+  on cards, staggered entrance, and count-up stats. Tilt and entrance
+  animation are disabled for reduced-motion, touch, and small screens.
 
 ## How to run
 
@@ -99,9 +109,13 @@ campus-maintenance-tracker/
       App.jsx
       api.js
       styles.css
+      utils.js
       components/
         ComplaintForm.jsx
         ComplaintList.jsx
+        TiltCard.jsx
+        StatCard.jsx
+        CategoryChart.jsx
       pages/
         AuthPage.jsx
         Dashboard.jsx

@@ -21,9 +21,9 @@ export default function App() {
   return (
     <>
       <header className="topbar">
-        <strong>Campus Maintenance Tracker</strong>
-        <span>
-          {user.name} ({user.role})
+        <span className="brand"><span className="brand-mark" aria-hidden="true">M</span>Campus Maintenance Tracker</span>
+        <span className="who">
+          <span><strong>{user.name}</strong> ({user.role})</span>
           <button className="secondary" type="button" onClick={logout}>Log out</button>
         </span>
       </header>

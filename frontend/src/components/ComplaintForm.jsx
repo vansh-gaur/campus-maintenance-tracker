@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { api } from "../api";
+import TiltCard from "./TiltCard";
 
 const CATEGORIES = ["Plumbing", "Electrical", "Wi-Fi", "Furniture", "Cleaning", "Other"];
 const PRIORITIES = ["Low", "Medium", "High"];
@@ -35,7 +36,7 @@ export default function ComplaintForm({ onCreated }) {
   }
 
   return (
-    <section className="card">
+    <TiltCard as="section" className="card" delay={80}>
       <h2>Raise a complaint</h2>
       {error && <div className="error">{error}</div>}
       <form onSubmit={submit}>
@@ -67,6 +68,6 @@ export default function ComplaintForm({ onCreated }) {
         </div>
         <button disabled={saving}>{saving ? "Submitting..." : "Submit complaint"}</button>
       </form>
-    </section>
+    </TiltCard>
   );
 }
